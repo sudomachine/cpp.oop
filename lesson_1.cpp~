@@ -1,0 +1,166 @@
+// for main func
+#include <iostream>
+
+// for RGBA class
+#include <cstdint>
+
+
+class Power
+{
+private:
+  // expNum ^ degreeNum
+  float exponentialNumber;
+  float degreeOfNumber;
+public:
+  // constr (default) without parametrs
+  Power()
+  {
+    exponentialNumber = 0;
+    degreeOfNumber = 0;
+  }
+  // constr with parametrs 
+  Power(float expNum, float degreeNum):
+    exponentialNumber(expNum),
+    degreeOfNumber(degreeNum)
+  {
+    // body of constructr
+  }
+  // destructr
+  ~Power()
+  {
+    // body of destructr
+  }
+
+public:
+  void setExponentialNumber(float exponentialNumber)
+  {
+   this->exponentialNumber = exponentialNumber;
+  }
+  void setDegreeOfNumber(float degreeOfNumber)
+  {
+   this->degreeOfNumber = degreeOfNumber;
+  }
+  float calculate()
+  {
+    // raising a number to a power is not necessary
+    if (degreeOfNumber == 0)
+      {
+	return 1.0f;
+      }
+   // 'calculatedNumber' multiply by 'exponentialNumber' for 'degreeOfNumber' times
+   float calculatedNumber = this->exponentialNumber;
+   for (int i = 0; i < this->degreeOfNumber; i++)
+     {
+       calculatedNumber *= this->exponentialNumber;
+     }
+   return calculatedNumber;
+  }
+};
+
+class RGBA
+{
+private:
+  // not used uint8_t because the compiler perceives this as like char type
+  std::uint16_t m_red;
+  std::uint16_t m_green;
+  std::uint16_t m_blue;
+  std::uint16_t m_alpha;
+
+public:
+  // constr default
+  RGBA()
+  {
+    m_red = 0;
+    m_green = 0;
+    m_blue = 0;
+    m_alpha = 255;
+  }
+  // constr with parametrs
+  RGBA(std::uint16_t red, std::uint16_t green, std::uint16_t blue, std::uint16_t alpha):
+    m_red(red), m_green(green), m_blue(blue), m_alpha(alpha)
+  {
+    // body of constr
+  }
+  // deconstr
+  ~RGBA()
+  {
+    // body of deconstr
+  }
+  void print() const
+  {
+    std::cout << "Red\t = " << m_red << std::endl \
+	      << "Green\t = " << m_green << std::endl \
+	      << "Blue\t = " << m_blue << std::endl \
+	      << "Alpha\t = " << m_alpha << std::endl;
+  }
+};
+
+class Stack
+{
+private:
+  const unsigned short SIZE = 10;
+  int stack[SIZE] = {0};
+  unsigned short stackLength;
+public:
+  // default constr
+  Stack()
+  {
+    stackLength = 0;
+  }
+  // deconstr
+  ~Stack()
+  {
+    // deconstr body
+  }
+  void reset()
+  {
+    stack = {0};
+    stackLength = 0;
+  }
+  bool push(const int NUMBER_TO_STACK)
+  {
+    // stack can't be crowded
+    if (stackLength == 10)
+      {
+	return false;
+      }
+    // else number will be added to stack
+    stack[stackLength] = NUMBER_TO_STACK;
+    stackLength++;
+    return true;
+  }
+  
+};
+
+int main()
+{
+  // TASK 1
+  std::cout << "##### TASK 1" << std::endl;
+  
+  // initialization
+  Power pwrObj1;
+  std::cout << pwrObj1.calculate() << std::endl;
+  // default initialization
+  Power pwrObj2(5.3f, 1.2f);
+  std::cout << pwrObj2.calculate() << std::endl;
+  // declaring and assignment
+  Power pwrObj3;
+  pwrObj3.setExponentialNumber(1.1f);
+  pwrObj3.setDegreeOfNumber(2.5f);
+  std::cout << pwrObj3.calculate() << std::endl;
+
+  // TASK 2
+  std::cout << "##### TASK 2" << std::endl;
+  
+  RGBA rgba1;
+  rgba1.print();
+  RGBA rgba2(25, 10, 14, 200);
+  rgba2.print();
+
+  // TASK 3
+  std::cout << "##### TASK 3" << std::endl;
+
+  
+  
+  return 0;
+}
